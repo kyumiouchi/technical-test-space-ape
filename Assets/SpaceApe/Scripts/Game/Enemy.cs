@@ -19,11 +19,16 @@ namespace DodgyBoxes
 		public Action<Enemy> CollisionOccurred = delegate { };
 
 		/// <summary>
+		/// Velocity of enemy get by difficulty
+		/// </summary>
+		private float _velocity = 1f;
+
+		/// <summary>
 		/// Update the position of the enemy.
 		/// </summary>
 		private void FixedUpdate()
 		{
-			rigidBody.position += Vector2.down * (Time.fixedDeltaTime * 1.0f);
+			rigidBody.position += Vector2.down * (Time.fixedDeltaTime * _velocity);
 		}
 
 		/// <summary>
@@ -42,6 +47,15 @@ namespace DodgyBoxes
 		private void OnTriggerEnter2D(Collider2D other)
 		{
 			CollisionOccurred(this);
+		}
+
+		/// <summary>
+		/// Set velocity to enemy
+		/// </summary>
+		/// <param name="velocity">Velocity of enemy</param>
+		public void SetVelocity(float velocity)
+		{
+			_velocity = velocity;
 		}
 	}
 }

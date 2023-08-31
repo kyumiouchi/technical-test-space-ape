@@ -11,15 +11,16 @@ namespace DodgyBoxes
         /// <summary>
         /// Delegate triggered when a difficulty is selected.
         /// </summary>
-        public Action DifficultySelected = delegate { };
+        public Action<DifficultySO> DifficultySelected = delegate { };
 
         /// <summary>
         /// Triggered when the player selects a difficulty.
         /// </summary>
-        public void OnDifficultySelectedButtonPressed()
+        /// <param name="difficulty">Get the Difficult Scriptable Object</param>
+        public void OnDifficultySelectedButtonPressed(DifficultySO difficulty)
         {
             AudioController.Instance.RunAudio(AudioType.BTN_Click);
-            DifficultySelected();
+            DifficultySelected(difficulty);
         }
     }
 }

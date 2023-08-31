@@ -111,15 +111,15 @@ namespace DodgyBoxes
         private void OnStartGame()
         {
             State = GameStates.DifficultyMenu;
-            game.InitialiseGame();
         }
 
         /// <summary>
         /// Triggered when the player chooses a difficulty.
         /// </summary>
-        private void OnDifficultySelected()
+        private void OnDifficultySelected(DifficultySO difficulty)
         {
             State = GameStates.Game;
+            game.InitialiseGame(difficulty);
         }
 
         /// <summary>

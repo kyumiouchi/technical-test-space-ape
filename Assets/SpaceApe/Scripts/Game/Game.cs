@@ -7,6 +7,7 @@ namespace DodgyBoxes
     /// <summary>
     /// Game component responsible for the behaviour and logic of the game. 
     /// </summary>
+    [RequireComponent(typeof(GameSettings))]
     public class Game : MonoBehaviour
     {
         /// <summary>
@@ -30,6 +31,10 @@ namespace DodgyBoxes
         [SerializeField] private Enemy enemyPrefab;
 
         /// <summary>
+        /// SettingsGame Component used to get game settings.
+        /// </summary>
+        [SerializeField] private GameSettings gameSettings;
+        /// <summary>
         /// The enemy in the game.
         /// </summary>
         private Enemy enemy;
@@ -42,11 +47,14 @@ namespace DodgyBoxes
         /// <summary>
         /// Initial setup of the game.
         /// </summary>
-        public void InitialiseGame()
+        /// <param name="difficultySo"></param>
+        public void InitialiseGame(DifficultySO difficulty)
         {
             player.gameObject.SetActive(true);
 
             ResetPlayerPosition();
+            
+            gameSettings.SetDifficulty(difficulty);
         }
 
         /// <summary>
@@ -115,6 +123,7 @@ namespace DodgyBoxes
             enemy.SetPosition(
                 gameCamera.ScreenPositionToWorldPosition(new Vector2(Screen.width * 0.5f, Screen.height))
             );
+            enemy.SetVelocity(gameSettings.DifficultySo.velocity);
             enemy.CollisionOccurred += OnPlayerHitEnemy;
         }
 

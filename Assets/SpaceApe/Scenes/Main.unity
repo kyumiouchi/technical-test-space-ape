@@ -879,12 +879,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 191638274}
-        m_TargetAssemblyTypeName: DifficultyMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: DodgyBoxes.DifficultyMenu, DodgyBoxes
         m_MethodName: OnDifficultySelectedButtonPressed
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 11400000, guid: bdc4f3d2fce0e5444a655f3e6cd4bec3,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: DifficultySO, DodgyBoxes
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1506,9 +1507,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 0
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2143,6 +2144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1387852823}
   - component: {fileID: 1387852824}
+  - component: {fileID: 1387852825}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -2185,6 +2187,19 @@ MonoBehaviour:
   hud: {fileID: 717676465}
   enemyPrefab: {fileID: 114296328297082860, guid: deed629ef7f2c4f78a9eb1433ddfd58e,
     type: 3}
+  gameSettings: {fileID: 1387852825}
+--- !u!114 &1387852825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387852822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c96af452fae05a4d97fecaa6de4e5da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1473627291
 GameObject:
   m_ObjectHideFlags: 0
@@ -2268,9 +2283,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 0
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2528,12 +2543,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 191638274}
-        m_TargetAssemblyTypeName: DifficultyMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: DodgyBoxes.DifficultyMenu, DodgyBoxes
         m_MethodName: OnDifficultySelectedButtonPressed
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 11400000, guid: 9b49c97bb18cf13439fff0887a15ae7c,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: DifficultySO, DodgyBoxes
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2860,12 +2876,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 191638274}
-        m_TargetAssemblyTypeName: DifficultyMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: DodgyBoxes.DifficultyMenu, DodgyBoxes
         m_MethodName: OnDifficultySelectedButtonPressed
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 11400000, guid: 529aac7c4cf515e44b4498eaee3aae57,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: DifficultySO, DodgyBoxes
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
