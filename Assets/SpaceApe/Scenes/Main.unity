@@ -1601,7 +1601,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: SPACE APE
+  m_Text: SCAPE SPACE
 --- !u!222 &1008467569
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2145,6 +2145,7 @@ GameObject:
   - component: {fileID: 1387852823}
   - component: {fileID: 1387852824}
   - component: {fileID: 1387852825}
+  - component: {fileID: 1387852826}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -2185,9 +2186,8 @@ MonoBehaviour:
   gameCamera: {fileID: 1679875372}
   player: {fileID: 1140867572}
   hud: {fileID: 717676465}
-  enemyPrefab: {fileID: 114296328297082860, guid: deed629ef7f2c4f78a9eb1433ddfd58e,
-    type: 3}
   gameSettings: {fileID: 1387852825}
+  enemyPool: {fileID: 1387852826}
   secondsBetweenSpawn: 5
 --- !u!114 &1387852825
 MonoBehaviour:
@@ -2205,6 +2205,23 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cb02c00d27f4f5347b8b72fb1178305b, type: 2}
   - {fileID: 11400000, guid: 19d0b95920c948540adf44b14788e72f, type: 2}
   - {fileID: 11400000, guid: cf2ee812d7d8d2c4bb5049242157b195, type: 2}
+--- !u!114 &1387852826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387852822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 973ab3e9eb17e954f9eed175716520ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectionCheck: 0
+  defaultCapacity: 10
+  maxSize: 30
+  enemyPrefab: {fileID: 114296328297082860, guid: deed629ef7f2c4f78a9eb1433ddfd58e,
+    type: 3}
 --- !u!1 &1473627291
 GameObject:
   m_ObjectHideFlags: 0

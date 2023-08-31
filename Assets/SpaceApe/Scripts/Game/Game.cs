@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace DodgyBoxes
 {
@@ -26,23 +27,19 @@ namespace DodgyBoxes
         [SerializeField] private GameHUD hud;
 
         /// <summary>
-        /// Enemy component of the enemy prefab, used to create new enemies
-        /// </summary>
-        [SerializeField] private Enemy enemyPrefab;
-
-        /// <summary>
-        /// SettingsGame Component used to get game settings.
+        /// Game settings Component used to get game settings.
         /// </summary>
         [SerializeField] private GameSettings gameSettings;
+        
         /// <summary>
-        /// The enemy in the game.
+        /// Enemy Spawner Component used to get spawn enemies.
         /// </summary>
-        private Enemy enemy;
+        [SerializeField] private EnemyPool enemyPool;
 
         /// <summary>
         /// Delegate triggered when the game is complete.
         /// </summary>
-        public Action GameComplete = delegate { };
+         public Action gameComplete = delegate { };
         
         /// <summary>
         /// Max time to spawn next enemy
@@ -69,7 +66,7 @@ namespace DodgyBoxes
             var playerRenderer = player.gameObject.GetComponent<Renderer>();
             _halfSizePlayer = gameCamera.GetWidthBySize(playerRenderer.bounds.extents.x);
 
-            gameSettings.ResetPlayerStartPosition(gameCamera.GetHeightBySize(playerRenderer.bounds.size.y));
+            gameSettings.SetPlayerStartPosition(Screen.width * 0.5f, gameCamera.GetHeightBySize(playerRenderer.bounds.size.y)*2);
         }
         
         /// <summary>
@@ -153,10 +150,9 @@ namespace DodgyBoxes
         /// </summary>
         private void SpawnEnemy()
         {
-            enemy = Instantiate(enemyPrefab);
-            enemy.SetPosition(
-                gameCamera.ScreenPositionToWorldPosition(new Vector2(Screen.width * gameSettings.RandomRange(), Screen.height))
-            );
+            var enemy = enemyPool.ObjectPool.Get();
+            var spawnPoint = new Vector2(Screen.width * gameSettings.RandomRange(), Screen.height);
+            enemy.SetPosition(gameCamera.ScreenPositionToWorldPosition(spawnPoint));
             enemy.SetVelocity(gameSettings.DifficultySo.velocity);
             enemy.SetEnemyData(gameSettings.GetEnemyData());
             enemy.collisionOccurred += OnPlayerHitEnemy;
@@ -165,10 +161,11 @@ namespace DodgyBoxes
         /// <summary>
         /// Destroy the enemy game object.
         /// </summary>
-        private void DestroyEnemy()
+        /// <param name="enemy"></param>
+        private void DestroyEnemy(Enemy enemy)
         {
-            Destroy(enemy.gameObject);
-            enemy = null;
+            enemy.collisionOccurred -= OnPlayerHitEnemy;
+            enemyPool.ObjectPool.Release(enemy);
         }
 
         /// <summary>
@@ -177,21 +174,22 @@ namespace DodgyBoxes
         /// <param name="enemy">Enemy instance which the player has hit.</param>
         private void OnPlayerHitEnemy(Enemy enemy)
         {
-            StartCoroutine(GameOverSequence());
+            StartCoroutine(GameOverSequence(enemy));
         }
 
         /// <summary>
         /// Coroutine which runs the game over sequence.
         /// </summary>
+        /// <param name="enemy"></param>
         /// <returns></returns>
-        private IEnumerator GameOverSequence()
+        private IEnumerator GameOverSequence(Enemy enemy)
         {
-            DestroyEnemy();
+            DestroyEnemy(enemy);
             player.gameObject.SetActive(false);
 
             yield return new WaitForSeconds(2.0f);
 
-            GameComplete();
+            gameComplete();
         }
     }
 }

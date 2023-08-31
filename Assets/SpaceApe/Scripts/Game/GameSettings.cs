@@ -41,9 +41,9 @@ namespace DodgyBoxes
             return Random.Range(0f, 1f);
         }
 
-        public void ResetPlayerStartPosition(float sizeY)
+        public void SetPlayerStartPosition(float positionX, float positionY)
         {
-            _playerStartPosition = new Vector2(Screen.width * 0.5f, sizeY);
+            _playerStartPosition = new Vector2(positionX, positionY);
         }
     }
 }

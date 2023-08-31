@@ -55,7 +55,7 @@ namespace DodgyBoxes
         {
             mainMenu.StartGame += OnStartGame;
             difficultyMenu.DifficultySelected += OnDifficultySelected;
-            game.GameComplete += OnGameComplete;
+            game.gameComplete += OnGameComplete;
             State = GameStates.MainMenu;
         }
 
