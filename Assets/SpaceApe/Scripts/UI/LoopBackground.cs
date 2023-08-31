@@ -3,9 +3,9 @@ using UnityEngine;
 namespace DodgyBoxes
 {
     /// <summary>
-    /// LootBackground which provides loop background in vertical movement.
+    /// LoopBackground which provides loop background in vertical movement.
     /// </summary>
-    public class LootBackground : MonoBehaviour
+    public class LoopBackground : MonoBehaviour
     {
         /// <summary>
         /// Velocity of the background.
