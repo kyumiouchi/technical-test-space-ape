@@ -43,7 +43,35 @@ namespace DodgyBoxes
         /// Delegate triggered when the game is complete.
         /// </summary>
         public Action GameComplete = delegate { };
+        
+        /// <summary>
+        /// Max time to spawn next enemy
+        /// </summary>
+        [SerializeField] private float secondsBetweenSpawn = 5f;
+        
+        /// <summary>
+        /// Add time to spawn enemies
+        /// </summary>
+        private float _elapsedTime = 0.0f;
 
+        
+        /// <summary>
+        /// Get half size of player to not pass the screen
+        /// </summary>
+        private float _halfSizePlayer;
+        /// <summary>
+        /// Current player screen position
+        /// </summary>
+        private Vector2 _currentPlayerScreenPosition;
+
+        private void Start()
+        {
+            var playerRenderer = player.gameObject.GetComponent<Renderer>();
+            _halfSizePlayer = gameCamera.GetWidthBySize(playerRenderer.bounds.extents.x);
+
+            gameSettings.ResetPlayerStartPosition(gameCamera.GetHeightBySize(playerRenderer.bounds.size.y));
+        }
+        
         /// <summary>
         /// Initial setup of the game.
         /// </summary>
@@ -62,9 +90,8 @@ namespace DodgyBoxes
         /// </summary>
         private void ResetPlayerPosition()
         {
-            var playerScreenPosition = new Vector2(Screen.width * 0.5f, 200);
-            var playerWorldPosition = gameCamera.ScreenPositionToWorldPosition(playerScreenPosition);
-            player.position = playerWorldPosition;
+            _currentPlayerScreenPosition = gameSettings.PlayerStartPosition;
+            player.position = gameCamera.ScreenPositionToWorldPosition(_currentPlayerScreenPosition);
         }
 
         /// <summary>
@@ -85,33 +112,40 @@ namespace DodgyBoxes
             if (hud.LeftButton.IsButtonDown)
             {
                 AudioController.Instance.RunAudio(AudioType.BTN_Click);
-                player.position = gameCamera.ScreenPositionToWorldPosition(new Vector2(100, 200));
+                SetPlayerNextPosition(_currentPlayerScreenPosition.x - 5);
             }
             else if (hud.RightButton.IsButtonDown)
             {
                 AudioController.Instance.RunAudio(AudioType.BTN_Click);
-                player.position = gameCamera.ScreenPositionToWorldPosition(new Vector2(Screen.width - 100, 200));
+                SetPlayerNextPosition(_currentPlayerScreenPosition.x + 5);
             }
         }
-
+        /// <summary>
+        /// Set player position does not go beyond the screen
+        /// </summary>
+        /// <param name="position"></param>
+        private void SetPlayerNextPosition(float position)
+        {
+            if (position < _halfSizePlayer)
+                position = _halfSizePlayer;
+            else if (position > (Screen.width - _halfSizePlayer))
+                position = Screen.width - _halfSizePlayer;
+            _currentPlayerScreenPosition.x = position;
+            player.position = gameCamera.ScreenPositionToWorldPosition(_currentPlayerScreenPosition);
+        }
+        
         /// <summary>
         /// Update the enemy, including spawning, and destroying the enemy when it goes off screen.
         /// </summary>
         private void UpdateEnemies()
         {
-            if (!enemy)
-            {
-                SpawnEnemy();
-            }
-            else
-            {
-                var enemyPositionOnScreen = gameCamera.WorldPositionToScreenPosition(enemy.transform.position);
-                if (enemyPositionOnScreen.y < 0)
-                {
-                    DestroyEnemy();
-                    SpawnEnemy();
-                }
-            }
+            if (!player.gameObject.activeSelf)
+                return;
+            
+            _elapsedTime += Time.fixedDeltaTime;
+            if (!(_elapsedTime > secondsBetweenSpawn)) return;
+            _elapsedTime = 0;
+            SpawnEnemy();
         }
 
         /// <summary>
@@ -121,10 +155,11 @@ namespace DodgyBoxes
         {
             enemy = Instantiate(enemyPrefab);
             enemy.SetPosition(
-                gameCamera.ScreenPositionToWorldPosition(new Vector2(Screen.width * 0.5f, Screen.height))
+                gameCamera.ScreenPositionToWorldPosition(new Vector2(Screen.width * gameSettings.RandomRange(), Screen.height))
             );
             enemy.SetVelocity(gameSettings.DifficultySo.velocity);
-            enemy.CollisionOccurred += OnPlayerHitEnemy;
+            enemy.SetEnemyData(gameSettings.GetEnemyData());
+            enemy.collisionOccurred += OnPlayerHitEnemy;
         }
 
         /// <summary>

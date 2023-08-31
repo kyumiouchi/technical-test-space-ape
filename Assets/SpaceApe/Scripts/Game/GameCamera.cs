@@ -69,5 +69,23 @@ namespace DodgyBoxes
 				(worldPosition.y / cameraHalfHeight) * halfScreenHeight + halfScreenHeight
 			);
 		}
+
+		/// <summary>
+		/// Calculate the size of object by the width
+		/// </summary>
+		/// <param name="worldSize"></param>
+		public float GetWidthBySize(float worldSize)
+		{
+			return worldSize * halfScreenWidth / cameraHalfWidth;
+		}
+
+		/// <summary>
+		/// Calculate the size of object by the height
+		/// </summary>
+		/// <param name="worldSize"></param>
+		public float GetHeightBySize(float worldSize)
+		{
+			return worldSize * halfScreenHeight / cameraHalfHeight;
+		}
 	}
 }

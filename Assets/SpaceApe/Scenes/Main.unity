@@ -1656,7 +1656,7 @@ GameObject:
   - component: {fileID: 1140867572}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2188,6 +2188,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 114296328297082860, guid: deed629ef7f2c4f78a9eb1433ddfd58e,
     type: 3}
   gameSettings: {fileID: 1387852825}
+  secondsBetweenSpawn: 5
 --- !u!114 &1387852825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2200,6 +2201,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c96af452fae05a4d97fecaa6de4e5da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  listEnemies:
+  - {fileID: 11400000, guid: cb02c00d27f4f5347b8b72fb1178305b, type: 2}
+  - {fileID: 11400000, guid: 19d0b95920c948540adf44b14788e72f, type: 2}
+  - {fileID: 11400000, guid: cf2ee812d7d8d2c4bb5049242157b195, type: 2}
 --- !u!1 &1473627291
 GameObject:
   m_ObjectHideFlags: 0
