@@ -18,6 +18,7 @@ namespace DodgyBoxes
         /// </summary>
         public void OnDifficultySelectedButtonPressed()
         {
+            AudioController.Instance.RunAudio(AudioType.BTN_Click);
             DifficultySelected();
         }
     }

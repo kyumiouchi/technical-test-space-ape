@@ -18,6 +18,7 @@ namespace DodgyBoxes
         /// </summary>
         public void StartGameButtonPressed()
         {
+            AudioController.Instance.RunAudio(AudioType.BTN_Click);
             StartGame();
         }
     }

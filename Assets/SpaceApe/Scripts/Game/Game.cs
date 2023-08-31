@@ -76,15 +76,13 @@ namespace DodgyBoxes
         {
             if (hud.LeftButton.IsButtonDown)
             {
+                AudioController.Instance.RunAudio(AudioType.BTN_Click);
                 player.position = gameCamera.ScreenPositionToWorldPosition(new Vector2(100, 200));
             }
             else if (hud.RightButton.IsButtonDown)
             {
+                AudioController.Instance.RunAudio(AudioType.BTN_Click);
                 player.position = gameCamera.ScreenPositionToWorldPosition(new Vector2(Screen.width - 100, 200));
-            }
-            else
-            {
-                player.position = gameCamera.ScreenPositionToWorldPosition(new Vector2(Screen.width * 0.5f, 200));
             }
         }
 
