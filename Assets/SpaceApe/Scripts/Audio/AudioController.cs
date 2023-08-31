@@ -58,7 +58,7 @@ namespace DodgyBoxes
             public AudioObject[] audio;
         }
         
-        private void Start()
+        private void Awake()
         {
             _audioTable = new Hashtable();
             GenerateAudioTable();

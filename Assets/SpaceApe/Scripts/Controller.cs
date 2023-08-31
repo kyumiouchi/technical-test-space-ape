@@ -57,6 +57,7 @@ namespace DodgyBoxes
             difficultyMenu.DifficultySelected += OnDifficultySelected;
             game.gameComplete += OnGameComplete;
             State = GameStates.MainMenu;
+            AudioController.Instance.RunAudio(AudioType.MSC_Menu);
         }
 
         /// <summary>
@@ -83,7 +84,6 @@ namespace DodgyBoxes
                         mainMenu.gameObject.SetActive(true);
                         difficultyMenu.gameObject.SetActive(false);
                         game.gameObject.SetActive(false);
-                        AudioController.Instance.RunAudio(AudioType.MSC_Menu);
                         break;
 
                     case GameStates.DifficultyMenu:
@@ -96,7 +96,6 @@ namespace DodgyBoxes
                         mainMenu.gameObject.SetActive(false);
                         difficultyMenu.gameObject.SetActive(false);
                         game.gameObject.SetActive(true);
-                        AudioController.Instance.RunAudio(AudioType.MSC_Game);
                         break;
 
                     case GameStates.Init:
@@ -122,6 +121,7 @@ namespace DodgyBoxes
         {
             State = GameStates.Game;
             game.InitialiseGame(difficulty);
+            AudioController.Instance.RunAudio(AudioType.MSC_Game);
         }
 
         /// <summary>
@@ -130,6 +130,7 @@ namespace DodgyBoxes
         private void OnGameComplete()
         {
             State = GameStates.MainMenu;
+            AudioController.Instance.RunAudio(AudioType.MSC_Menu);
         }
     }
 }
