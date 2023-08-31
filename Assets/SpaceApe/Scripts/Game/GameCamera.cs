@@ -66,7 +66,7 @@ namespace DodgyBoxes
 		{
 			return new Vector2(
 				(worldPosition.x / cameraHalfWidth) * halfScreenWidth + halfScreenWidth,
-				(worldPosition.x / cameraHalfHeight) * halfScreenHeight + halfScreenHeight
+				(worldPosition.y / cameraHalfHeight) * halfScreenHeight + halfScreenHeight
 			);
 		}
 	}
