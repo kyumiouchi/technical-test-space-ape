@@ -83,6 +83,7 @@ namespace DodgyBoxes
                         mainMenu.gameObject.SetActive(true);
                         difficultyMenu.gameObject.SetActive(false);
                         game.gameObject.SetActive(false);
+                        AudioController.Instance.RunAudio(AudioType.MSC_Menu);
                         break;
 
                     case GameStates.DifficultyMenu:
@@ -95,6 +96,7 @@ namespace DodgyBoxes
                         mainMenu.gameObject.SetActive(false);
                         difficultyMenu.gameObject.SetActive(false);
                         game.gameObject.SetActive(true);
+                        AudioController.Instance.RunAudio(AudioType.MSC_Game);
                         break;
 
                     case GameStates.Init:
